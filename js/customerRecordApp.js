@@ -48,7 +48,7 @@ angular.module('customerRecordApp', [])
         $scope.customers = [];
         console.log("No JSON storage found, creating black customer array...");
       }else{
-        $scope.customers = window.localStorage['customerRecordAppStorage'];
+        $scope.customers = JSON.parse(window.localStorage['customerRecordAppStorage']);
         console.log("JSON storage found, loading customer array...")
       }
     };

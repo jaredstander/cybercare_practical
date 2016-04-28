@@ -1,2 +1,3 @@
 body {font-family:sans-serif;}
-#form-container {float:left;}
+#form-container {background-color:red;}
+#list-container {background-color:pink;}

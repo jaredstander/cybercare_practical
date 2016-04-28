@@ -1,4 +1,4 @@
-<html ng-app="customerRecordApp">
+<html ng-app="customerRecordApp" ng-controller="customerRecordAppController">
 
   <head>
     <meta charset="UTF-8">
@@ -10,7 +10,7 @@
   </head>
 
   <body>
-    <div id="form-container" ng-controller="customerRecordAppController">
+    <div id="form-container">
       Name : <input ng-model="customerName" type="text" /><br />
       Email : <input ng-model="customerEmail" type="text" /><br />
       Telephone : <input ng-model="customerTelephone" type="text" /><br />
@@ -22,7 +22,7 @@
       <button ng-click="createCustomer()">Create Customer</button>
     </div>
     <div id="list-container">
-      <li ng-repeat="(name, email) in customers">{{name}} {{email}}</li>
+      <li ng-repeat="(id, cust) in customers track by $index">{{cust.name}} {{cust.email}}</li>
     </div>
   </body>
 

@@ -11,17 +11,18 @@
 
   <body>
     <div id="form-container" ng-controller="customerRecordAppController">
-        Name : <input ng-model="customerName" type="text" /><br />
-        Email : <input ng-model="customerEmail" type="text" /><br />
-        Telephone : <input ng-model="customerTelephone" type="text" /><br />
-        <p>Address</p>
-        Street : <input ng-model="customerStreet" type="text" /><br />
-        City : <input ng-model="customerCity" type="text" /><br />
-        State : <input ng-model="customerState" type="text" /><br />
-        Zipcode : <input ng-model="customerZipcode" type="text" /><br />
-        <button ng-click="createCustomer()">Create Customer</button>
+      Name : <input ng-model="customerName" type="text" /><br />
+      Email : <input ng-model="customerEmail" type="text" /><br />
+      Telephone : <input ng-model="customerTelephone" type="text" /><br />
+      <p>Address</p>
+      Street : <input ng-model="customerStreet" type="text" /><br />
+      City : <input ng-model="customerCity" type="text" /><br />
+      State : <input ng-model="customerState" type="text" /><br />
+      Zipcode : <input ng-model="customerZipcode" type="text" /><br />
+      <button ng-click="createCustomer()">Create Customer</button>
     </div>
     <div id="list-container">
+      <li ng-repeat="(name, email) in customers">{{name}} {{email}}</li>
     </div>
   </body>
 

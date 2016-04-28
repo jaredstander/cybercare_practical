@@ -10,19 +10,41 @@
   </head>
 
   <body>
-    <div id="form-container">
-      Name : <input ng-model="customerName" type="text" /><br />
-      Email : <input ng-model="customerEmail" type="text" /><br />
-      Telephone : <input ng-model="customerTelephone" type="text" /><br />
-      <p>Address</p>
-      Street : <input ng-model="customerStreet" type="text" /><br />
-      City : <input ng-model="customerCity" type="text" /><br />
-      State : <input ng-model="customerState" type="text" /><br />
-      Zipcode : <input ng-model="customerZipcode" type="text" /><br />
-      <button ng-click="createCustomer()">Create Customer</button>
-    </div>
-    <div id="list-container">
-      <li ng-repeat="(id, cust) in customers track by $index">{{cust.name}} {{cust.email}}</li>
+    <div id="main-container">
+      <h2>Customer Record Manager</h2>
+      <div id="form-container">
+        <div id="form" class="inner-container">
+          <span class="form-labels">Name</span> : <input ng-model="customerName" type="text" /><br />
+          <span class="form-labels">Email</span> : <input ng-model="customerEmail" type="text" /><br />
+          <span class="form-labels">Telephone</span> : <input ng-model="customerTelephone" type="text" /><br />
+          <p class="section-break">Address</p>
+          <span class="form-labels">Street</span> : <input ng-model="customerStreet" type="text" /><br />
+          <span class="form-labels">City</span> : <input ng-model="customerCity" type="text" /><br />
+          <span class="form-labels">State</span> : <input ng-model="customerState" type="text" /><br />
+          <span class="form-labels">Zipcode</span> : <input ng-model="customerZipcode" type="text" /><br />
+          <br />
+          <button ng-click="createCustomer()">Create Customer</button>
+          &nbsp;
+          <button ng-click="clearCustomerForm()">Clear Form</button>
+        </div>
+      </div>
+      <div id="list-container">
+        <div class="inner-container">
+          <p class="customer-record" ng-repeat="(id, cust) in customers track by $index">
+            Name : {{cust.name}}<br />
+            Email : {{cust.email}}<br />
+            Telephone : {{cust.telephone}}<br />
+            Street : {{cust.street}}<br />
+            City : {{cust.city}}<br />
+            State : {{cust.state}}<br />
+            Zipcode : {{cust.zipcode}}<br />
+            <br />
+            <button ng-click="updateCustomer($index)">Update</button>
+            &nbsp;
+            <button ng-click="deleteCustomer($index)">Delete</button>
+          </p>
+        </div>
+      </div>
     </div>
   </body>
 

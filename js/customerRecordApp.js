@@ -2,20 +2,28 @@ angular.module('customerRecordApp', [])
 
   .controller('customerRecordAppController', function($scope){
 
+    $scope.saveCustomerList = function() {
+      window.localStorage['customerRecordAppStorage'] = angular.toJson($scope.customers);
+    }
+
     $scope.createCustomer = function() {
       $scope.customers.push({name: $scope.customerName, email: $scope.customerEmail, telephone: $scope.customerTelephone, street: $scope.customerStreet, city: $scope.customerCity, state: $scope.customerState, zipcode: $scope.customerZipcode});
-      window.localStorage['customerRecordAppStorage'] = angular.toJson($scope.customers);
-      $scope.clearForm();
+      $scope.saveCustomerList();
+      $scope.clearCustomerForm();
       console.log("Customer record pushed into customer array, saved into JSON.");
     };
 
-    $scope.deleteCustomer = function() {
+    $scope.deleteCustomer = function(customerIndex) {
       // remove at index
+      $scope.customers.splice(customerIndex, 1);
+      $scope.saveCustomerList();
       console.log("Customer record deleted.");
     };
 
-    $scope.updateCustomer = function() {
+    $scope.updateCustomer = function(customerIndex) {
       // pop out the customer record, butfill the form with it.
+      $scope.customerRecordToUpdate = $scope.customers.splice(customerIndex, 1);
+      $scope.loadForm($scope.customerRecordToUpdate[0]);
       console.log("Customer record _replaced_. (removed at index, re-saved as a new record.)");
     };
 
@@ -30,7 +38,7 @@ angular.module('customerRecordApp', [])
       console.log("Form data filled based on hash passed from customer array.");
     }
 
-    $scope.clearForm = function() {
+    $scope.clearCustomerForm = function() {
       $scope.customerName = "";
       $scope.customerEmail = "";
       $scope.customerTelephone = "";

@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="author" content="Jared Stander">
     <link rel="stylesheet" type="text/css" href="css/style.css">
-    <!-- // <script src="js/jquery-1.12.3.min.js"></script> -->
     <script src="js/angular.min.js" type="text/javascript"></script>
     <script src="js/customerRecordApp.js" type="text/javascript"></script>
   </head>
@@ -13,23 +12,22 @@
     <div id="main-container">
       <h2>Customer Record Manager</h2>
       <div id="form-container">
-        <div id="form" class="inner-container">
-          <span class="form-labels">Name</span> : <input ng-model="customerName" type="text" /><br />
-          <span class="form-labels">Email</span> : <input ng-model="customerEmail" type="text" /><br />
-          <span class="form-labels">Telephone</span> : <input ng-model="customerTelephone" type="text" /><br />
-          <p class="section-break">Address</p>
-          <span class="form-labels">Street</span> : <input ng-model="customerStreet" type="text" /><br />
-          <span class="form-labels">City</span> : <input ng-model="customerCity" type="text" /><br />
-          <span class="form-labels">State</span> : <input ng-model="customerState" type="text" /><br />
-          <span class="form-labels">Zipcode</span> : <input ng-model="customerZipcode" type="text" /><br />
-          <br />
-          <button ng-click="createCustomer()">Create Customer</button>
+        <div id="inner-container-left">
+          <p style="text-align:center;"><span class="form-labels">Name</span> : <input ng-model="customerName" type="text" /></p>
+          <p class="center"><span class="form-labels">Email</span> : <input ng-model="customerEmail" type="text" /></p>
+          <p class="center"><span class="form-labels">Telephone</span> : <input ng-model="customerTelephone" type="text" /></p>
+          <p class="center">Address</p>
+          <p class="center"><span class="form-labels">Street</span> : <input ng-model="customerStreet" type="text" /></p>
+          <p class="center"><span class="form-labels">City</span> : <input ng-model="customerCity" type="text" /></p>
+          <p class="center"><span class="form-labels">State</span> : <input ng-model="customerState" type="text" /></p>
+          <p class="center"><span class="form-labels">Zipcode</span> : <input ng-model="customerZipcode" type="text" /></p>
+          <p class="center"><button ng-click="createCustomer()">{{formAction}}</button>
           &nbsp;
-          <button ng-click="clearCustomerForm()">Clear Form</button>
+          <button ng-click="clearCustomerForm()">Clear Form</button></p>
         </div>
       </div>
       <div id="list-container">
-        <div class="inner-container">
+        <div id="inner-container-right">
           <p class="customer-record" ng-repeat="(id, cust) in customers track by $index">
             Name : {{cust.name}}<br />
             Email : {{cust.email}}<br />

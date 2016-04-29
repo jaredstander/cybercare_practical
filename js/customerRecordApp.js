@@ -4,10 +4,21 @@ angular.module('customerRecordApp', [])
 
     $scope.saveCustomerList = function() {
       // Below code does not use an external file.
-      // window.localStorage['customerRecordAppStorage'] = angular.toJson($scope.customers);
-      var jsonFileData = new Blob($scope.customers, {type: 'application/json'});
-      jsonFile = window.URL.createObjectURL(jsonFileData);
+      window.localStorage['customerRecordAppStorage'] = angular.toJson($scope.customers);
+
+      // External JSON file methods gave 405 method not allowed errors, seems to require server-side configuration.
+      // $http.post('js/customerData.json', angular.toJson($scope.customers)).then(fileSaveSuccess, fileSaveError);
     }
+
+    // function fileSaveSuccess(response){
+    //   console.log("JSON file saved successfully.");
+    //   console.log(response.data);
+    // }
+
+    // function fileSaveError(response){
+    //   console.log("JSON file save error occured.");
+    //   console.log(response.data);
+    // }
 
     $scope.createCustomer = function() {
       if($scope.customerName === undefined){
@@ -60,49 +71,39 @@ angular.module('customerRecordApp', [])
     };
 
     // Original init function to use localStorage for storing customer records.
-    // function init() {
-    //   $scope.formAction = "Create Record";
-    //   console.log("Initializing... Checking for existing data...");
-    //   // Load existing JSON data if there is any.
-    //   if(window.localStorage['customerRecordAppStorage'] === undefined) {
-    //     $scope.customers = [];
-    //     console.log("No JSON storage found, creating black customer array...");
-    //   }else{
-    //     $scope.customers = JSON.parse(window.localStorage['customerRecordAppStorage']);
-    //     console.log("JSON storage found, loading customer array...")
-    //   }
-    // };
-
-    // init();
-
-    function init(){
-      var request = $http({url: 'customerData.json', dataType: 'json', method: 'GET'});
-      return (request.then(handleSuccess, handleFailure))
-    }
-
-    function handleSuccess(response){
-      // poop
-    }
-
-    function handleFailure(response){
-      // poop
-    }
+    function init() {
+      $scope.formAction = "Create Record";
+      console.log("Initializing... Checking for existing data...");
+      // Load existing JSON data if there is any.
+      if(window.localStorage['customerRecordAppStorage'] === undefined) {
+        $scope.customers = [];
+        console.log("No JSON storage found, creating black customer array...");
+      }else{
+        $scope.customers = JSON.parse(window.localStorage['customerRecordAppStorage']);
+        console.log("JSON storage found, loading customer array...")
+      }
+    };
 
     init();
 
-    // $http({
-    //   url: 'customerData.json',
-    //   dataType: 'json',
-    //   method: 'POST',
-    //   data: '',
-    //   headers: {
-    //       "Content-Type": "application/json"
-    //   }
-    // }).success(function(response){
-    //     $scope.customers = JSON.parse(response);
-    // }).error(function(error){
-    //     $scope.names = [];
-    //     console.log(error);
-    // });  
+    // External storage method. Unable to test, as I was unable to get file writing to work.
+    // function init(){
+    //   $scope.formAction = "Create Record";
+    //   $http({method: 'GET', url: 'js/customerData.json'}).then(function handleLoadSuccess(response){
+    //     console.log(response.data);
+    //     if(response.data === ""){
+    //       $scope.customers = [];
+    //       console.log("JSON file empty, creating empty array for customer data.");
+    //     }else{
+    //       $scope.customers = JSON.parse(response.data);
+    //       console.log("JSON loaded successfully.");
+    //     }
+    //   }, function handleLoadFailure(response){
+    //     $scope.customers = [];
+    //     console.log("No JSON file found, creating empty array for customer data.");
+    //   });
+    // }
+
+    // init();
 
   });

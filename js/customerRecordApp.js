@@ -25,7 +25,7 @@ angular.module('customerRecordApp', [])
         alert("At least a customer name is required.");
         console.log("Attempted to create record without any information.");
       }else{
-        $scope.customers.push({name: $scope.customerName, email: $scope.customerEmail, telephone: $scope.customerTelephone, street: $scope.customerStreet, city: $scope.customerCity, state: $scope.customerState, zipcode: $scope.customerZipcode});
+        $scope.customers.push({name: $scope.customerName, email: $scope.customerEmail, telephone: $scope.customerTelephone, street: $scope.customerStreet, city: $scope.customerCity, state: $scope.customerState, zipcode: $scope.customerZipcode, creationDate: Date.now()});
         $scope.saveCustomerList();
         $scope.clearCustomerForm();
         $scope.formAction = "Create Record";
@@ -75,7 +75,7 @@ angular.module('customerRecordApp', [])
       $scope.formAction = "Create Record";
       console.log("Initializing... Checking for existing data...");
       // Load existing JSON data if there is any.
-      if(window.localStorage['customerRecordAppStorage'] === undefined) {
+      if(window.localStorage['customerRecordAppStorage'] === "") {
         $scope.customers = [];
         console.log("No JSON storage found, creating black customer array...");
       }else{

@@ -37,6 +37,7 @@
             City : {{cust.city}}<br />
             State : {{cust.state}}<br />
             Zipcode : {{cust.zipcode}}<br />
+            Creation Date : {{cust.creationDate | date : 'MMM dd yyyy HH:mm:ss Z'}}<br />
             <br />
             <button ng-click="updateCustomer($index)">Update</button>
             &nbsp;
